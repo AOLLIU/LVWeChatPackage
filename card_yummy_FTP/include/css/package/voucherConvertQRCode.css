@@ -1,0 +1,71 @@
+
+
+* {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-callout:none;
+}
+
+.userQRCodeCardNum{
+    text-align: center;
+    margin-top: 50px;
+    color: #4990e2;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Heiti SC";
+}
+
+.userQRCodeCardContainer{
+    text-align: center
+}
+
+.userQRCodeImageDiv{
+    margin-top: 20px;
+    text-align: center;
+    /*background-color: #1d8ce0;*/
+    display: inline-block
+}
+
+.userQRCodeFirstTip{
+    margin-top: 20px;
+    color: #4990e2;
+    font-size: 18px;
+    text-align: center;
+}
+
+.getIntegralCardDetail{
+    margin: 15px;
+}
+
+.distributeIntegralContainer{
+    margin-left: 10px;
+    color: #808080;
+    position: relative;
+    height: 20px;
+}
+
+.distributeIntegralState{
+    position: absolute;
+    right: 10px;
+}
+
+.distributeIntegralMoneyState{
+    position: absolute;
+    right: 10px;
+}
+
+.seperateLine{
+    margin: 20px 0px;
+    height: 1px;
+    background-color: #e5e5e5;
+}
+
+.canUseStateSpanRed{
+    color: #d32210;
+}
+
+.canUseStateSpanGreen{
+    color: #80CA2E;
+}

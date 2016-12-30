@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>我的条形码</title>
+    <link rel="stylesheet" href="../include/css/package/barcode.css">
+</head>
+<body id="app">
+<!--二维码-->
+<div class="userBarcodeInfoContainer">
+    <!--头部信息-->
+    <div class="barcodeHeaderContainer">
+        <div class="userIconImageDiv">
+            <img v-bind:src="userCardInfo.userIconImageUrl" id="userIconImage">
+        </div>
+        <div class="userInfoDiv">
+            <div class="userNameDiv">
+                <label class="userName">AOLIU</label>
+            </div>
+            <div class="userDesDiv">
+                <label class="userDes">正佳微会员,微粉丝</label>
+            </div>
+        </div>
+    </div>
+    <!--二维码-->
+    <div class="barcodeContainerDiv">
+        <div class="barcodeTargetDiv">
+            <div id="barcodeTarget"></div>
+        </div>
+
+        <div class="userBarcodeNumberDiv">
+            <label class="userBarcodeLabel">会员卡号:</label>
+            <label class="userBarcodeNumber">135-6039-8888</label>
+        </div>
+    </div>
+</div>
+
+<script src="../include/jquery.min.js"></script>
+<script src="../include/vue.min.js"></script>
+<script src="../include/jquery-barcode-2.0.2.min.js"></script>
+<script>
+
+    $(function () {
+        getUserInfoAndBarcode()
+    });
+    function getUserInfoAndBarcode() {
+
+        appData.userCardInfo = {
+            userIconImageUrl:"./others/Snip20161205_5.png",
+            userName:"AOLIU",
+            userInfoDes:"正佳微会员,微粉丝",
+            userBarcodeNum:"13560398703"
+        }
+
+        generateBarcode();
+    }
+
+
+    function generateBarcode(){
+
+        var value = "13560398703";
+        var btype = "code128";
+        var renderer = "css";
+        var settings = {
+            output:renderer,
+            bgColor: "#FFFFFF",
+            color: "#000000",
+            barWidth: "1",
+            barHeight: "50",
+            moduleSize: "5",
+            addQuietZone: "1",
+            showHRI:false
+        };
+        $("#barcodeTarget").html("").show().barcode(value, btype, settings);
+    }
+
+    var appData = {
+        userCardInfo:{}
+    };
+
+    var appFunc = {
+    };
+
+    var appVue = new Vue({
+        el: "#app",
+        data: appData,
+        methods: {
+        },
+        ready: function () {
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>积分券</title>
+    <link rel="stylesheet" href="../include/css/package/myVoucher.css">
+</head>
+<body>
+
+<div id="app">
+
+    <!--v-for="d in projectGroupRows"-->
+
+    <!--分项列表-->
+    <div class="projectGroup">
+        <ul class="projectGroupRows">
+            <li class="projectGroupRowItem" v-for="d in projectGroupRows" @click="projectGroupRowItemOnClick(d.trueVoucherNum,d.voucherValue,d.canuse)">
+                <div class="innerFirstDiv">
+                    <span class="mianzhiSpan">面值:{{d.voucherValue}}元</span>
+                    <span class="canUseStateSpan">{{d.canuse}}</span>
+                </div>
+                <div class="innerSecondDiv">
+                    <span class="voucherNum">券号:{{d.voucherNum}}</span>
+                    <!--<span class="voucherendTime">{{d.voucherendTime}}</span>-->
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+<script src="../include/jquery.min.js"></script>
+<script src="../include/vue.min.js"></script>
+<script src="../include/js/globleAddress.js"></script>
+<script>
+
+    $(function () {
+    });
+
+    var appData = {
+        projectGroupRows:[],
+
+    };
+
+    var appFunc = {
+        projectGroupRowItemOnClick : function(trueVoucherNum,voucherValue,canuse) {
+
+            if (canuse == "未使用"){
+                canuse = 1
+            }else {
+                canuse = 0
+            }
+            window.location.href = "./voucherConvertQRCode.html?voucherNum="+trueVoucherNum+"&voucherValue="+voucherValue+"&canuse="+canuse
+        },
+
+    };
+
+    var app = new Vue({
+        el : '#app',
+        data : appData,
+        methods : {
+            projectGroupRowItemOnClick:appFunc.projectGroupRowItemOnClick,
+        },
+        mounted : function() {
+            getmyVoucherListData()
+        }
+    });
+
+    function getmyVoucherListData() {
+
+        $.ajax({
+            url : globle_address+"myCoupons",
+            data : {
+            },
+            type : "POST",
+            success : function(data) {
+                if (data.errcode == "0") {
+                    var array = data.data.reverse()
+                    var myArray=new Array()
+
+                        for(rowitem in array){
+                            var row = {}
+                            row.voucherValue = array[rowitem].amount/100;//面额
+                            if(array[rowitem].useStatus == 1){
+                                row.canuse = "已核销"
+                            }else {
+                                row.canuse = "未使用"
+                            }
+                            row.trueVoucherNum = array[rowitem].couponNo
+                            row.voucherNum = array[rowitem].couponNo.substr(0,11)
+                            myArray.push(row)
+                        }
+                    appData.projectGroupRows = myArray
+
+                    setTimeout(function () {
+                        $(".canUseStateSpan").each(function () {
+                            if($(this).html() == "已核销"){
+                                $(this).addClass("canUseStateSpanRed")
+                            }else {
+                                $(this).addClass("canUseStateSpanGreen")
+                            }
+                        })
+                    },0)
+
+
+                } else if (data.errcode == "403") {
+                      alert("获取失败");
+                } else {
+                      alert(data.errmsg);
+                }
+            }
+        });
+
+
+//        appData.projectGroupRows = [
+//            {"voucherValue":"10","canuse":"可用","voucherNum":"778878788","voucherendTime":"2017-12-31",},
+//            {"voucherValue":"20","canuse":"不可用","voucherNum":"888878788","voucherendTime":"2017-12-30"},
+//            {"voucherValue":"30","canuse":"可用","voucherNum":"998878788","voucherendTime":"2017-12-29"},
+//            {"voucherValue":"40","canuse":"可用","voucherNum":"008878788","voucherendTime":"2017-12-28"},
+//        ];
+    }
+
+</script>
+
+</body>
+</html>

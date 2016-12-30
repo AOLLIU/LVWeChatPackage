@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>付款</title>
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="../include/css/package/wepay.css">
+</head>
+<body id="app">
+
+
+        <div class="bgImageDiv" style="position: relative">
+            <img src="./others/wepayPage.png" width="100%">
+            <div style="position: absolute;top: 300px; width: 100%;height: 200px" onclick="jumpToSuccessPage()">
+
+            </div>
+        </div>
+
+
+</body>
+<script src="../include/vue.min.js"></script>
+<script src="../include/jquery.min.js"></script>
+<script>
+
+    function jumpToSuccessPage() {
+        window.location.href = "./successPay.html";
+    }
+
+</script>
+</html>

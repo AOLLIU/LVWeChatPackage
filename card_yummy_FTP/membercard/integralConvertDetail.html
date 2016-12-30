@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>积分兑换</title>
+    <link rel="stylesheet" href="../include/css/package/integralConvertDetail.css">
+</head>
+<body>
+
+<div id="app">
+
+    <!--支付详情-->
+    <div class="getIntegralCardDetail">
+        <div class="getIntegralCardDetailTitle">积分详情</div>
+        <div class="seperateLine"></div>
+        <div class="getIntegralCardDetailMoney">
+            <span class="getIntegralCardDetailMoneyTitle">当前可用积分</span>
+            <span class="getIntegralCardDetailMoneyCount">{{totalintegral}}</span>
+            <div class="canDeductibleMoney">可抵扣: {{totalintegral/100}}元</div>
+        </div>
+        <div class="seperateLine"></div>
+        <div class="canGetIntegralLimitContainer">
+            <span class="getIntegralCardDetailMoneyTitle">输入兑换金额:(元)</span>
+
+
+            <input class="canGetIntegralLimit" type="number" value="0" v-model="message"
+                   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                   onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}" />
+
+
+        </div>
+
+        <div class="seperateLine"></div>
+        <div class="distributeIntegralContainer">
+            <span class="distributeIntegral">预计消耗积分:</span>
+            <span class="distributeIntegralState">{{accMul(message,100)}}</span>
+        </div>
+        <div class="seperateLine"></div>
+    </div>
+
+    <!--确认积分兑换按钮-->
+    <div class="confirmConvertBtnContainer">
+        <span class="confirmConvertBtn" @click="confirmConvertBtnClick">确认积分兑换</span>
+    </div>
+
+
+
+</div>
+
+
+<script src="../include/jquery.min.js"></script>
+<script src="../include/vue.min.js"></script>
+
+<script>
+
+    $(function () {
+    });
+
+    var appData = {
+        totalintegral:0,
+        message:""
+    };
+
+    function accMul(arg1,arg2)
+    {
+        var m=0,s1=arg1.toString(),s2=arg2.toString();
+        try{m+=s1.split(".")[1].length}catch(e){}
+        try{m+=s2.split(".")[1].length}catch(e){}
+        return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)
+    }
+
+    var appFunc = {
+
+        confirmConvertBtnClick :function () {
+            if (appData.message > 0){
+                if (appData.message>999999){
+                    alert("输入金额过大")
+                }else {
+                    $.ajax({
+                        url : "integralExchange",
+                        data : {
+                            integral : appData.message*100*100
+                        },
+                        type : "POST",
+                        success : function(data) {
+                            if (data.errcode == "0") {
+                                window.location.href = "./myVoucher.html"
+                            } else if (data.errcode == "403") {
+                                alert("获取失败");
+                            } else {
+                                alert(data.errmsg);
+                            }
+                        }
+                    });
+                }
+            }else {
+                alert("请输入大于0的金额")
+            }
+
+
+        },
+        getQueryString : function(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+
+    };
+
+    var app = new Vue({
+        el : '#app',
+        data : appData,
+        methods : {
+            confirmConvertBtnClick:appFunc.confirmConvertBtnClick,
+            getQueryString:appFunc.getQueryString,
+        },
+        mounted : function() {
+            getTotalIntegral()
+        }
+    });
+
+    function getTotalIntegral() {
+
+        var totalintegral = appFunc.getQueryString("totalintegral")
+        if(totalintegral != null){
+            appData.totalintegral = Number(totalintegral)
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

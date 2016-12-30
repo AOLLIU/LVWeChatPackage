@@ -1,0 +1,22 @@
+
+* {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-callout:none;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 200px;
+}
+.page1 {
+    background-color: rebeccapurple;
+}
+.page2 {
+    background-color: red;
+}
+.page3 {
+    background-color: #5EA4EC;
+}

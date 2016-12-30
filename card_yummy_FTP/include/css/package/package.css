@@ -1,0 +1,573 @@
+/* colors */
+/* font size */
+/* percents */
+/* margins */
+/* paddings */
+/* head img */
+/* table bar */
+* {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-callout:none;
+}
+
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.clearfix {
+  clear: both;
+}
+.clearfix:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  content: ".";
+}
+.row {
+  clear: both;
+  position: relative;
+}
+.row:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  content: ".";
+}
+.row.margin {
+  margin-bottom: 10px;
+}
+.col-20 {
+  width: 20%;
+}
+.col-25 {
+  width: 25%;
+}
+.col-33 {
+  width: 33.33333333%;
+}
+.col-50 {
+  width: 50%;
+}
+.col-66 {
+  width: 66.66666667%;
+}
+.col-75 {
+  width: 75%;
+}
+.col-20,
+.col-25,
+.col-33,
+.col-50,
+.col-66,
+.col-75 {
+  float: left;
+  min-height: 1px;
+}
+.col-offset-25 {
+  margin-left: 25%;
+}
+.col-offset-33 {
+  margin-left: 33.33333333%;
+}
+.col-offset-50 {
+  margin-left: 50%;
+}
+.col-offset-66 {
+  margin-left: 66.66666667%;
+}
+.col-offset-75 {
+  margin-left: 75%;
+}
+.pull-down-text,
+.pull-up-text {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  padding-bottom: 15px;
+}
+.pull-down,
+.pull-up {
+  margin: 0 auto;
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  font-size: 10px;
+  padding-top: 10px;
+}
+.pull-down > div,
+.pull-up > div {
+  background-color: #fff;
+  height: 100%;
+  width: 3px;
+  display: inline-block;
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+.pull-down .rect2,
+.pull-up .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+.pull-down .rect3,
+.pull-up .rect3 {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+.pull-down .rect4,
+.pull-up .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+.pull-down .rect5,
+.pull-up .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+@-webkit-keyframes stretchdelay {
+  0%,
+  40%,
+  100% {
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    -webkit-transform: scaleY(1);
+  }
+}
+@keyframes stretchdelay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
+/* reset */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+  margin: 0;
+  padding: 0;
+}
+header,
+footer,
+section,
+article,
+aside,
+nav,
+hgroup,
+address,
+figure,
+figcaption,
+menu,
+details {
+  display: block;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+caption,
+th {
+  text-align: left;
+  font-weight: normal;
+}
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+  border: 0;
+}
+i,
+cite,
+em,
+var,
+address,
+dfn {
+  font-style: normal;
+}
+[hidefocus],
+summary {
+  outline: 0;
+}
+li {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small {
+  font-size: 100%;
+}
+sup,
+sub {
+  font-size: 83%;
+}
+pre,
+code,
+kbd,
+samp {
+  font-family: inherit;
+}
+q:before,
+q:after {
+  content: none;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}
+label,
+summary {
+  cursor: default;
+}
+a,
+button {
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+strong,
+b {
+  font-weight: bold;
+}
+del,
+ins,
+u,
+s,
+a,
+a:hover {
+  text-decoration: none;
+}
+body,
+textarea,
+input,
+button,
+select,
+keygen,
+legend {
+  font: 12px/1.2 arial, helvetica, sans-serif;
+  color: #333;
+  outline: 0;
+}
+a,
+a:hover {
+  color: #333;
+}
+.topBanner {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+.topImage {
+  width: 100%;
+  overflow: hidden;
+  height: 150px;
+  /*height: 300px;*/
+}
+.topImage > img {
+  width: 100%;
+}
+.innerContent {
+  margin-top: -130px;
+  margin-bottom: 20px;
+}
+.userIcon > img {
+  width: 50px;
+  border-radius: 25px;
+}
+.userName {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: bold;
+  height: 20px;
+}
+.userDiscription {
+  margin-top: 5px;
+  font-size: 13px;
+  color: #ffffff;
+  height: 20px;
+}
+
+
+.fence {
+  background-color: white;
+  border-bottom: 1px solid #e5e5e5;
+  height: 66px;
+}
+#list {
+  height: 64px;
+}
+#list > li {
+  margin-top: 15px;
+  float: left;
+  border-right: 1px solid #e5e5e5;
+  text-align: center;
+}
+#list > li:last-child {
+  border-right: 0px;
+}
+
+.fenceTitle {
+  color: #8f8e94;
+  font-size: 14px;
+}
+.fenceDes {
+  margin-top: 4px;
+  color: #4a4a4a;
+  font-size: 14px;
+}
+
+
+
+.projectGroup {
+  margin-top: 20px;
+}
+.projectGroupRows {
+  border-top: 1px solid #e5e5e5;
+  background-color: white;
+}
+
+.projectGroupRowItem {
+  height: 60px;
+  line-height: 60px;
+  border-bottom: 1px solid #e5e5e5;
+  /*background-color: #00cc00;*/
+}
+
+.projectItemImageDiv {
+  display: inline-block;
+  vertical-align: middle;
+  /*background-color: #1d8ce0;*/
+  margin-top: -4px;
+}
+
+.projectItemImage {
+  height: 24px;
+  width: 24px;
+  /*border-radius: 20px;*/
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.labelDiv {
+  /*width: 70%;*/
+  display: inline-block;
+  /*margin-top: 3px;*/
+  /*background-color: peachpuff;*/
+}
+
+.rowTitle {
+  margin-left: 20px;
+  font-size: 16px;
+  /*background-color: cyan;*/
+}
+.rowSubTitle {
+  float: right;
+  margin-right: 15px;
+  font-size: 13px;
+  color: aqua;
+}
+.table_bar {
+  clear: both;
+  border-top: 1px solid #0050a3;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: #ffffff;
+  height: 60px;
+}
+.table_bar:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  content: ".";
+}
+.table_bar > .nav-view {
+  width: 25%;
+  float: left;
+  min-height: 1px;
+  text-align: center;
+}
+.table_bar_btn {
+  height: 60px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.table_bar_btn > .label {
+  font-size: 12px;
+  line-height: 24px;
+  color: #e4007e;
+  text-align: center;
+}
+.table_bar_btn > .logo-home,
+.table_bar_btn .logo-market,
+.table_bar_btn .logo-active,
+.table_bar_btn .logo-me {
+  width: 40px;
+  height: 36px;
+  margin: 0 auto;
+  background: url('../source/logos.png');
+  background-size: 160px auto;
+  background-repeat: no-repeat;
+}
+.table_bar_btn > .logo-home {
+  background-position: 0 0;
+}
+.table_bar_btn > .logo-market {
+  background-position: -40px 0;
+}
+.table_bar_btn > .logo-active {
+  background-position: -80px 0;
+}
+.table_bar_btn > .logo-me {
+  background-position: -120px 0;
+}
+.table_bar_btn.active .label {
+  color: #0050a3;
+}
+.table_bar_btn.active .logo-home {
+  background-position: 0 -37px;
+}
+.table_bar_btn.active .logo-market {
+  background-position: -40px -37px;
+}
+.table_bar_btn.active .logo-active {
+  background-position: -80px -37px;
+}
+.table_bar_btn.active .logo-me {
+  background-position: -120px -37px;
+}
+.fab {
+  z-index: 100;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  background: #0050a3;
+  -webkit-box-shadow: 0 2px 4px 0 #494949;
+  box-shadow: 0 2px 4px 0 #494949;
+}
+.fab.withTableBar {
+  bottom: 90px;
+}
+.fab > .icon {
+  height: 24px;
+  width: 24px;
+  /*background: url('../source/logos.png');*/
+  background-size: 160px auto;
+  background-repeat: no-repeat;
+  background-position: -72px -136px;
+  margin: 13px;
+}
+
+
+body {
+  background-color: #f8f8f8;
+}
+.barcodeEnterDiv {
+  background-color: white;
+  height: 66px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.barcodeEnterDivLeftDiv {
+  margin-top: 13px;
+  margin-left: 15px;
+  display: inline-block;
+}
+.barcodeEnterRightDiv {
+  float: right;
+  margin-right: 15px;
+  margin-top: 19px;
+}
+.memberCardNumDiv {
+  height: 20px;
+  padding: 0px;
+  line-height: 20px;
+}
+.memberCardTipDiv {
+  padding: 0px;
+  line-height: 20px;
+}
+
+.memberCardNumLabel{
+  color: #4990e2;
+  font-size: 18px;
+  /*margin-right: 5px;*/
+}
+
+
+.memberCardNum {
+  color: #4990e2;
+  font-size: 18px;
+  height: 20px;
+  font-weight: bold;
+}
+.memberCardTip {
+  color: #9b9b9b;
+  font-size: 14px;
+}
+#barcodeEnterImage {
+  width: 25px;
+}

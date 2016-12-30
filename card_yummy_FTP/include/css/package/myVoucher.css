@@ -1,0 +1,99 @@
+/* reset */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: white;
+}
+
+* {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-callout:none;
+}
+
+.projectGroupRowItem{
+
+    padding: 5px 0px;
+    /*background-color: #1d8ce0;*/
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.innerFirstDiv{
+    height: 30px;
+    /*background-color: red;*/
+    padding:0px 15px;
+    line-height: 25px;
+}
+
+.innerSecondDiv{
+    height: 30px;
+    /*background-color: gold;*/
+    padding:0px 15px;
+    line-height: 25px;
+}
+
+.mianzhiSpan{
+    /*padding:0px 15px;*/
+    font-size: 18px;
+    color: #498fe1;
+}
+
+.canUseStateSpan{
+    float: right;
+    font-size: 14px;
+}
+
+.voucherNum{
+    color: #9b9b9b;
+    font-size: 14px;
+}
+
+.voucherendTime{
+    color: #9b9b9b;
+    font-size: 14px;
+    float: right;
+    font-family: Helvetica;
+}
+
+.canUseStateSpanRed{
+    color: #d32210;
+}
+
+.canUseStateSpanGreen{
+    color: #80CA2E;
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>积分券</title>
+    <link rel="stylesheet" href="../include/css/package/voucherConvertQRCode.css">
+</head>
+<body>
+<!--二维码-->
+<div id="app">
+    <div class="userQRCodeInfoContainer">
+
+        <!--会员卡号-->
+        <div class="userQRCodeCardNum">面值:{{qrCodeTitle}}元</div>
+
+        <!--二维码图片-->
+        <div class="userQRCodeCardContainer">
+            <div class="userQRCodeImageDiv"></div>
+        </div>
+
+        <!--提示-->
+        <div class="userQRCodeFirstTip">券号:{{userCardNumber.substr(0,11)}}</div>
+        <div class="userQRCodeFirstTip">出示该券给收银员扫描核销</div>
+
+
+        <!--券使用情况-->
+        <div class="getIntegralCardDetail">
+            <div class="seperateLine"></div>
+            <div class="distributeIntegralContainer">
+                <span class="distributeIntegral">积分券状态:</span>
+                <span class="distributeIntegralState">{{canuse}}</span>
+            </div>
+            <div class="seperateLine"></div>
+            <div class="distributeIntegralContainer">
+                <span class="distributeIntegral">积分券面值:</span>
+                <span class="distributeIntegralMoneyState">¥ {{qrCodeTitle}}元</span>
+            </div>
+            <div class="seperateLine"></div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="../include/jquery.min.js"></script>
+<script src="../include/vue.min.js"></script>
+<script src="../include/jquery.qrcode.min.js"></script>
+
+<script>
+
+    $(function () {
+    });
+
+    var appData = {
+        userCardNumber:"",
+        qrCodeTitle:"",
+        canuse:""
+    };
+
+    var appFunc = {
+        getQueryString : function(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+    };
+
+    var app = new Vue({
+        el : '#app',
+        data : appData,
+        methods : {
+            getQueryString:appFunc.getQueryString,
+        },
+        mounted : function() {
+            getUserCardNum()
+        }
+    });
+
+    function getUserCardNum() {
+
+        var voucherNumber = appFunc.getQueryString("voucherNum")
+        if (voucherNumber != null){
+            appData.userCardNumber = voucherNumber
+        }
+        var voucherValue = appFunc.getQueryString("voucherValue")
+        if (voucherValue != null){
+            appData.qrCodeTitle = voucherValue
+        }
+        var canuse = appFunc.getQueryString("canuse")
+        if (canuse != null){
+
+            if (canuse == 1){
+                canuse = "未使用"
+            }else {
+                canuse = "已核销"
+            }
+            appData.canuse = canuse
+        }
+
+        setTimeout(function () {
+            if($(".distributeIntegralState").html() == "已核销"){
+                $(".distributeIntegralState").addClass("canUseStateSpanRed")
+            }else {
+                $(".distributeIntegralState").addClass("canUseStateSpanGreen")
+            }
+        },0)
+
+
+        createUserQRCodeImage(appData.userCardNumber)
+    }
+
+    function createUserQRCodeImage(userCardNumber) {
+
+        var screenW = document.documentElement.clientWidth;
+//            var screenH = document.documentElement.clientHeight;
+
+
+        $('.userQRCodeImageDiv').qrcode({
+            render: "canvas",
+            height: screenW * 3 / 5,
+            width: screenW  * 3 / 5,
+            correnctLevel:0,
+            text: userCardNumber
+        });
+    }
+
+</script>
+
+</body>
+</html>

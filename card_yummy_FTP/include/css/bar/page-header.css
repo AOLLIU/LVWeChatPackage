@@ -1,0 +1,42 @@
+.no-user-select {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.box-sizing {
+  box-sizing: border-box;
+}
+.relative {
+  position: relative;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.clearfix {
+  clear: both;
+}
+.clearfix:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  content: ".";
+}
+.page-header {
+  padding: 15px 0 5px 0;
+  border-bottom: 1px solid #ac2a2a;
+  margin-bottom: 15px;
+}
+.page-header > .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.page-header > .subtitle {
+  margin-top: 5px;
+  color: #a9a9a9;
+}

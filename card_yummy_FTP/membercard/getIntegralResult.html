@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>积分领取</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../include/css/package/getIntegralResult.css">
+</head>
+<body>
+
+<div id="app">
+
+    <!--凭证编号-->
+    <div class="proofNumber">凭证编号: {{integralCardInfo.proofNumber}}</div>
+
+    <!--领取提示-->
+    <div class="getIntegralCardContainer">
+        <div class="getIntegralCardTipImageContainer">
+            <!--<img src="./others/Snip20161215_10.png" class="getIntegralCardTipImage">-->
+            <img v-bind:src="tipImage" class="getIntegralCardTipImage">
+        </div>
+        <div class="cardTipImageFirstTip">积分领取成功!</div>
+        <div class="cardTipImageSecondTip">本次消费累计积分 {{integralCardInfo.distributeIntegral}}</div>
+    </div>
+
+    <!--支付详情-->
+    <div class="getIntegralCardDetail">
+        <div class="getIntegralCardDetailTitle">支付详情:</div>
+        <div class="seperateLine"></div>
+        <div class="getIntegralCardDetailMoney">
+            <span class="getIntegralCardDetailMoneyTitle">消费金额</span>
+            <span class="getIntegralCardDetailMoneyCount">¥ {{integralCardInfo.integralCardDetailMoney}}元</span>
+        </div>
+        <div class="seperateLine"></div>
+        <div class="canGetIntegralLimitContainer">
+            <span class="canGetIntegralLimit">可积分额度: ¥ {{integralCardInfo.canGetIntegralLimit}}元</span>
+        </div>
+
+        <div class="seperateLine"></div>
+        <div class="distributeIntegralContainer">
+            <span class="distributeIntegral">发放积分: {{integralCardInfo.distributeIntegral}}</span>
+            <span class="distributeIntegralState">已领取</span>
+        </div>
+    </div>
+
+    <!--查看积分记录按钮-->
+    <!--<div class="scanRecordBtn">查看积分记录</div>-->
+
+</div>
+
+
+<script src="../include/zepto.min.js"></script>
+<script src="../include/vue.min.js"></script>
+
+<script>
+
+    $(function () {
+    });
+
+    var appData = {
+        integralCardInfo:{},
+        tipImage:"./others/Snip20161215_10.png"
+    };
+
+    var appFunc = {
+    };
+
+    var app = new Vue({
+        el : '#app',
+        data : appData,
+        methods : {
+        },
+        mounted : function() {
+            getIntegralCardInfo();
+        }
+    });
+
+    function getIntegralCardInfo() {
+        appData.integralCardInfo = {"proofNumber":"SFXXXXXX0001","distributeIntegral":"20","integralCardDetailMoney":"200","canGetIntegralLimit":"200"}
+    }
+
+</script>
+
+</body>
+</html>

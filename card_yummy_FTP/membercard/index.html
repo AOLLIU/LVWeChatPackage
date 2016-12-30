@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>会员中心</title>
+<meta name="description" content="">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="stylesheet" href="../include/css/package/package.css">
+</head>
+<body>
+	<div id="app">
+		<!--<button @click="bClick">Btn</button>-->
+		<!--<div>{{msg}}</div>-->
+
+
+		<!--头部-->
+		<div class="topBanner" >
+			<!--背景图片-->
+			<div class="topImage">
+				<img v-bind:src="userCardInfo.bannerBg" id="bannerBackgroudImage">
+			</div>
+			<div class="innerContent">
+				<!--头像-->
+				<div class="userIcon">
+					<img v-bind:src="userCardInfo.userIcon" id="userIconImage">
+				</div>
+				<!--用户名-->
+				<div class="userName">{{userCardInfo.userName}}</div>
+				<!--用户描述-->
+				<!--<div class="userDiscription">{{userCardInfo.userDescribe}}</div>-->
+				<div class="userDiscription">通用积分会员</div>
+			</div>
+		</div>
+
+		<!--分栏-->
+		<div class="fence">
+			<ul id="list">
+				<li v-for="d in list"  @click="fenceOnClick(d.fenceToPageUrl)">
+					<div class="fenceTitle">{{d.fenceTitle}}</div>
+					<div class="fenceDes">{{d.fenceSubTitle}}</div>
+				</li>
+			</ul>
+		</div>
+
+		<!--条形码入口-->
+		<div class="barcodeEnterDiv" @click="barcodeEnterDivClick">
+			<div class="barcodeEnterDivLeftDiv">
+				<div class="memberCardNumDiv">
+					<!--<label class="memberCardNumLabel">201688086680</label>-->
+					<label class="memberCardNum">2016-8808-680{{userCardInfo.userCardNum}}</label>
+				</div>
+				<div class="memberCardTipDiv">
+					<label class="memberCardTip">点击查看会员卡,累计消费积分</label>
+				</div>
+			</div>
+			<div class="barcodeEnterRightDiv">
+				<img src="./others/QR.png" id="barcodeEnterImage">
+			</div>
+		</div>
+
+
+		<!--分项列表-->
+		<div class="projectGroup">
+			<ul class="projectGroupRows">
+				<li v-for="d in projectGroupRows" class="projectGroupRowItem" @click="projectGroupRowItemOnClick(d.url)">
+
+					<div class="projectItemImageDiv">
+						<img v-bind:src="d.projectItemImage" class="projectItemImage">
+					</div>
+					<div class="labelDiv">
+						<label class="rowTitle">{{d.rowTitle}}</label>
+						<label class="rowSubTitle">{{d.rowSubTitle}}</label>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+
+
+	</div>
+</body>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--<script src="../include/zepto.min.js"></script>-->
+<script src="../include/vue.min.js"></script>
+<script src="../include/tool.js"></script>
+<script src="../include/js/alertWindow.js"></script>
+ <script src="../include/jquery.min.js"></script>
+<script src="../include/js/globleAddress.js"></script>
+<script>
+
+	var appData = {
+		msg : "",
+        userCardInfo:{},
+        list: [],
+        projectGroupRows:[],
+	}
+
+    var appFunc = {
+        fenceOnClick : function(url) {
+            if (url === "yu'e.com") {
+//                myAlertWindow.initial("提示", "还没有这个功能,敬请期待")
+				alert("还没有这个功能,敬请期待!")
+            } else {
+                nextPageURL = url + "?myIntegral="+Math.floor(appData.userCardInfo.myIntegral/100)
+                window.location.href = nextPageURL;
+            }
+        },
+        barcodeEnterDivClick : function() {
+            var userCardNumber = appData.userCardInfo.userCardNum;
+            var url = "./qrCode.html?userCardNum="+userCardNumber;
+            window.location.href = url;
+
+        },
+        projectGroupRowItemOnClick : function(url) {
+
+            if (url === "卡包") {
+                if (JwxTool.isWxReady) {
+                    JwxTool.wxcardCreateSign('pxM3psobdlRjdQNHpU3h2HjXlz8o',
+                        function(res) {
+                            // on success call
+                        });
+                } else {
+                    alert("is not Ready")
+                    appData.msg = "is not Ready";
+                }
+            } else {
+
+                //积分兑换传递参数
+                url = url+"?totalintegral="+Math.floor(appData.userCardInfo.myIntegral/100)
+                window.location.href = url;
+            }
+        },
+        getQueryString : function(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+    }
+
+	JwxTool.ready(function () {
+        JwxTool.wxhideOptionMenu()
+    })
+
+	var app = new Vue({
+		el : '#app',
+		data : appData,
+		methods : {
+
+            fenceOnClick: appFunc.fenceOnClick,
+            projectGroupRowItemOnClick:appFunc.projectGroupRowItemOnClick,
+            barcodeEnterDivClick:appFunc.barcodeEnterDivClick,
+            getQueryString:appFunc.getQueryString,
+		},
+
+		mounted : function() {
+		    initPageData();
+            loadfencelist();
+            JwxTool.JsapiSign(false, 'wx41dc46a54f790917', [ "addCard",
+                "openCard" ]);
+		}
+	});
+
+	function initPageData() {
+
+        appData.list = [
+            {"fenceTitle":"我的积分","fenceSubTitle":"0","fenceToPageUrl":"./jifen.html"},
+            {"fenceTitle":"积分券","fenceSubTitle":"0张","fenceToPageUrl":"./myVoucher.html"},
+            {"fenceTitle":"优惠券","fenceSubTitle":"敬请期待","fenceToPageUrl":"yu'e.com"}
+        ];
+
+        appData.projectGroupRows = [
+            {"projectItemImage":"./others/money.png","rowTitle":"积分兑换","rowSubTitle":"","url":"./integralConvertDetail.html"},
+            {"projectItemImage":"./others/user.png","rowTitle":"会员资料","rowSubTitle":"","url":"./personalInfo.html"},
+            {"projectItemImage":"./others/wepay.png","rowTitle":"微信支付","rowSubTitle":"","url":"./wepay.html"},
+        ];
+
+        var listCount = appData.list.length;
+
+        setTimeout(function(){
+            $('#list li').width(( document.body.clientWidth / listCount - listCount + 1));
+        },0);
+    }
+
+
+    function loadfencelist() {
+
+        $.ajax({
+            url : globle_address+"memberinfo",
+            data : {
+                u : appFunc.getQueryString("u")
+            },
+            type : "POST",
+            success : function(data) {
+                if (data.errcode == "0") {
+                    appData.userCardInfo = data.data;
+
+                    appData.list = [
+                        {"fenceTitle":"我的积分","fenceSubTitle":Math.floor(appData.userCardInfo.myIntegral/100),"fenceToPageUrl":"./jifen.html"},
+                        {"fenceTitle":"积分券","fenceSubTitle":appData.userCardInfo.myCouponCount + "张","fenceToPageUrl":"./myVoucher.html"},
+                        {"fenceTitle":"优惠券","fenceSubTitle":"敬请期待","fenceToPageUrl":"yu'e.com"}
+                    ];
+
+                } else if (data.errcode == "403") {
+                      alert("获取失败");
+                } else {
+                      alert(data.errmsg);
+                }
+            }
+        });
+
+    }
+
+</script>
+</html>

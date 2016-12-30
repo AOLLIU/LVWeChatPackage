@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>积分记录</title>
+    <link rel="stylesheet" href="../include/css/package/myjifen.css">
+</head>
+<body>
+
+<div id="app">
+
+    <!--头部-->
+    <div class="myjifenTopBanner" >
+        <div class="myjifenText">我的积分</div>
+        <div class="myjifenCount">{{myIntegral}}</div>
+    </div>
+
+
+    <!--中间内容-->
+    <div class="contentContainer">
+        <div class="contentTitle">
+            积分变动明细
+        </div>
+        <!--分项列表-->
+        <div class="projectGroup">
+            <ul class="projectGroupRows">
+                <li class="projectGroupRowItem"  v-for="d in receiptrecord">
+                    <div class="innerFirstDiv">
+                        <span class="mianzhiSpan">{{d.amount}}</span>
+                    </div>
+                    <div class="innerSecondDiv">
+                        <span class="voucherNum">{{d.creatTime}}</span>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="../include/vue.min.js"></script>
+<script src="../include/jquery.min.js"></script>
+<script src="../include/js/globleAddress.js"></script>
+<script>
+
+    var appData = {
+        myIntegral:"",
+        receiptrecord:[]
+    }
+
+    var appFunc = {
+
+        getQueryString : function(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+    }
+
+
+    var app = new Vue({
+        el : '#app',
+        data : appData,
+        methods : {
+            getQueryString:appFunc.getQueryString,
+        },
+
+        mounted : function() {
+            getTotalIntegral()
+            loadreceiptrecord()
+        }
+    });
+
+    function getTotalIntegral() {
+
+        var myIntegral = appFunc.getQueryString("myIntegral")
+        if(myIntegral != null){
+            appData.myIntegral = myIntegral
+        }
+    }
+
+    function loadreceiptrecord() {
+
+        $.ajax({
+            url : globle_address+"receiptrecord",
+            data : {
+            },
+            type : "POST",
+            success : function(data) {
+                if (data.errcode == "0") {
+
+                    var array = data.data.reverse();
+                    var myArray=new Array()
+
+                    for (rowitem in array){
+                        var row = {}
+                        var ammount = array[rowitem].amount/100 //面额
+                        var type = array[rowitem].type
+                        if(type == 1){
+                            row.amount =  "+"+ammount
+                        }else if(type == 2){
+                            row.amount = "-"+ammount
+                        }
+
+                        var creatInterval =  array[rowitem].createTime;
+                        var date = new Date(creatInterval);
+                        row.creatTime = date.format("yyyy年MM月dd日 hh:mm:ss")//创建时间
+                        myArray.push(row)
+                    }
+                    appData.receiptrecord = myArray
+
+                    setTimeout(function () {
+                        $(".mianzhiSpan").each(function () {
+                            if($(this).html() > 0){
+                                $(this).addClass("mianzhiSpanRed")
+                            }
+                        })
+                    },0)
+
+                } else if (data.errcode == "403") {
+                    alert("获取失败");
+                } else {
+                    alert(data.errmsg);
+                }
+            }
+        });
+
+    }
+
+    //时间格式化,调用示例new
+//     Date(startTime).format("yyyy-MM-dd")
+    //startTime为时间戳
+    Date.prototype.format = function (format) {
+        var date = {
+            "M+": this.getMonth() + 1,
+            "d+": this.getDate(),
+            "h+": this.getHours(),
+            "m+": this.getMinutes(),
+            "s+": this.getSeconds(),
+            "q+": Math.floor((this.getMonth() + 3) / 3),
+            "S+": this.getMilliseconds()
+        };
+        if (/(y+)/i.test(format)) {
+            format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+        }
+        for (var k in date) {
+            if (new RegExp("(" + k + ")").test(format)) {
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+            }
+        }
+        return format;
+    };
+
+</script>
+
+</body>
+</html>

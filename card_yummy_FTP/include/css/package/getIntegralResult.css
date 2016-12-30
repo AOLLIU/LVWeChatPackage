@@ -1,0 +1,165 @@
+/* reset */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-callout:none;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+.proofNumber{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #4A494A;
+    font-size: 14px;
+    margin-left: 15px;
+}
+
+
+
+.getIntegralCardContainer {
+    background-color: white;
+    border-radius: 5px;
+    margin: 15px;
+    text-align: center;
+    height: 200px;
+}
+
+.getIntegralCardTipImageContainer{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 20px 0px 0px;
+}
+
+.getIntegralCardTipImage {
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+}
+
+.cardTipImageFirstTip{
+    color: #4A494A;
+    font-size: 18px;
+    font-weight: bold;
+}
+.cardTipImageSecondTip{
+    margin-top: 5px;
+    color: #4A494A ;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.getIntegralCardDetail{
+    margin: 15px;
+}
+
+.getIntegralCardDetailTitle{
+    color: #4A494A;
+    font-size: 18px;
+    /*font-weight: bold;*/
+}
+
+.seperateLine{
+    margin: 15px 0px;
+    height: 1px;
+    background-color: #e5e5e5;
+}
+
+.getIntegralCardDetailMoney{
+    top: 2px;
+    height: 20px;
+    margin-left: 10px;
+    color: #4A494A ;
+    position: relative;
+    font-size: 14px;
+}
+
+.getIntegralCardDetailMoneyTitle{
+}
+
+.getIntegralCardDetailMoneyCount{
+    position: absolute;
+    right: 10px;
+}
+
+.canGetIntegralLimitContainer{
+    margin-left: 10px;
+    color: 	#4A494A;
+    top: 2px;
+    position: relative;
+    height: 20px;
+    font-size: 14px;
+}
+
+
+.canGetIntegralLimit{
+    position: absolute;
+    right: 10px;
+}
+
+.distributeIntegralContainer{
+    margin-left: 10px;
+    color: 	#4A494A;
+    position: relative;
+    top: 2px;
+    height: 20px;
+    font-size: 14px;
+}
+
+.distributeIntegralState{
+    position: absolute;
+    right: 10px;
+    color: #ff0000;
+}
+
+.warningColor{
+    color: #ff0000;
+}
+
+.nouseState{
+    color: 	#4A494A;
+}
+
+.fontWeight{
+    font-weight:bold;
+}

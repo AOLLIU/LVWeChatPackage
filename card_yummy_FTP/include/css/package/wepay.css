@@ -1,0 +1,13 @@
+body {
+    background-color: #f8f8f8;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.bgImageDiv{
+    width: 100%;
+    /*background-color: red;*/
+}

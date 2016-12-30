@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>会员卡</title>
+    <link rel="stylesheet" href="../include/css/package/qrCode.css">
+</head>
+<body>
+    <!--二维码-->
+    <div id="app">
+        <div class="userQRCodeInfoContainer">
+
+            <!--会员卡号-->
+            <div class="userQRCodeCardNum">2016-8808-680{{qrCodeTitle}}</div>
+
+            <!--二维码图片-->
+            <div class="userQRCodeCardContainer">
+                <div class="userQRCodeImageDiv"></div>
+            </div>
+
+            <!--提示-->
+            <div class="userQRCodeFirstTip">将二维码放置扫描窗下扫描</div>
+            <div class="userQRCodeSecondTip">请将屏幕亮度调整至正常值</div>
+
+        </div>
+    </div>
+
+
+<script src="../include/jquery.min.js"></script>
+<script src="../include/vue.min.js"></script>
+<script src="../include/jquery.qrcode.min.js"></script>
+
+<script>
+
+        $(function () {
+        });
+
+        var appData = {
+            userCardNumber:"",
+            qrCodeTitle:""
+        };
+
+        var appFunc = {
+            getQueryString : function(name) {
+                var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return unescape(r[2]);
+                }
+                return null;
+            }
+        };
+
+        var app = new Vue({
+            el : '#app',
+            data : appData,
+            methods : {
+                getQueryString:appFunc.getQueryString,
+            },
+            mounted : function() {
+                getUserCardNum()
+            }
+        });
+
+        function getUserCardNum() {
+
+            var number = appFunc.getQueryString("userCardNum")
+            if(number != null){
+                appData.userCardNumber = number
+                appData.qrCodeTitle = number
+            }
+
+            createUserQRCodeImage(appData.userCardNumber)
+        }
+
+        function createUserQRCodeImage(userCardNumber) {
+
+            var screenW = document.documentElement.clientWidth;
+//            var screenH = document.documentElement.clientHeight;
+
+            $('.userQRCodeImageDiv').qrcode({
+                render: "canvas",
+                height: screenW * 3 / 5,
+                width: screenW  * 3 / 5,
+                correnctLevel:0,
+                text: userCardNumber
+            });
+        }
+
+</script>
+
+</body>
+</html>
